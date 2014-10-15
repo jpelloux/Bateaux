@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project >
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_file>C:\Partage\Cours\TP ALGO\TpBateaux\bateaux.adb</vfs_file>
+    </file_marker>
+  </Project>
+  <Project >
+    <vfs_file >C:\Partage\Cours\TpBateauxV3\TpBateaux\bateaux.gpr</vfs_file>
+    <file_marker current="true" column=" 1" line=" 1">
+      <vfs_file >C:\Partage\Cours\TpBateauxV3\TpBateaux\bateaux.adb</vfs_file>
+    </file_marker>
+  </Project>
+  <Project >
+    <file_marker current="true" column=" 1" line=" 1">
+      <vfs_file >C:\Users\Axel\Desktop\TpBateaux\bateaux.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

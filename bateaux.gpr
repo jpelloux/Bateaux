@@ -1,0 +1,14 @@
+project Bateaux is
+
+   for Main use ("bateaux.adb");
+
+   package Naming is
+      for Specification_Suffix ("ada") use ".ads";
+      for Implementation_Suffix ("ada") use ".adb";
+      for Separate_Suffix use ".adb";
+      for Casing use "MixedCase";
+      for Dot_Replacement use "-";
+   end Naming;
+
+end Bateaux;
+
