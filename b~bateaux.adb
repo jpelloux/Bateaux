@@ -254,9 +254,9 @@ package body ada_main is
    end;
 
 --  BEGIN Object file/option list
-   --   C:\Partage\Cours\TP ALGO\TpBateaux\bateaux.o
-   --   -LC:\Partage\Cours\TP ALGO\TpBateaux\
-   --   -LC:\Partage\Cours\TP ALGO\TpBateaux\
+   --   C:\Partage\Cours\TP ALGO\TpBateau\bateaux.o
+   --   -LC:\Partage\Cours\TP ALGO\TpBateau\
+   --   -LC:\Partage\Cours\TP ALGO\TpBateau\
    --   -LC:/GNAT/2014/lib/gcc/i686-pc-mingw32/4.7.4/adalib/
    --   -static
    --   -lgnat

@@ -345,14 +345,45 @@ procedure bateaux is
 
    end Autocomplete;
 
-   procedure TRI_RUBAN_PAR_HEURE (R: in out RUBAN_DE_BATEAUX) is
-      H:HEURE;
+   procedure INVERSE_ORDRE_DANS_RUBAN (Position: in integer;K: integer ; R: in out RUBAN_DE_BATEAUX) is
+      i : integer; --counter
    begin
-
-      if  then
+      if K=1 then --Ouvrir ruban
+         DEMARRER1;
+      elsif K=2 then
+         DEMARRER2;
       else
+         DEMARRERL;
       end if;
-   end TRI_RUBAN_PAR_HEURE;
+      i :=0; --Reset counter
+      While i /= Position loop --On se place sur la i-�me donn�e
+         if K=1 then
+            AVANCER1;
+         elsif K=2 then
+            AVANCER2;
+         else
+            AVANCERL;
+         end if;
+         i := i+1;
+      end loop;
+       put(BAT_COUR1.NBAT);
+       if K=1 then -- Fermer ruban
+         FERMER1;
+      elsif k=2 then
+         FERMER2;
+      else
+         FERMERL;
+          end if;
+   end INVERSE_ORDRE_DANS_RUBAN;
+--     procedure TRI_RUBAN_PAR_HEURE (R: in out RUBAN_DE_BATEAUX) is
+--        H:HEURE;
+--     begin
+--
+--        if  then
+--           null;
+--        else
+--        end if;
+--     end TRI_RUBAN_PAR_HEURE;
 
    function TIME_PLUS (D: DUREE ;H: HEURE ) return DUREE is
 
@@ -431,12 +462,12 @@ procedure bateaux is
       FERMER1;FERMER2;
    end AFFICH_NB_LOC_INF_2H;
 
-   procedure CREATION_RUBAN_LOCATIONS is
-
-   begin
-
-   end CREATION_RUBAN_LOCATIONS;
-
+--     procedure CREATION_RUBAN_LOCATIONS is
+--
+--     begin
+--
+--     end CREATION_RUBAN_LOCATIONS;
+--
 
    ----------------------------------------------------------------------------
    ------------------------- ALGORITHME PRINCIPAL
@@ -469,7 +500,8 @@ begin
       --- Put_Line ("5 : Création du ruban des locations.");
       Put_Line ("5 : Autocomplete");
 
-      Put_Line ("6 : Affichage du ruban des locations.");
+      --Put_Line ("6 : Affichage du ruban des locations.");
+      Put_Line ("6 : Teste.");
 
       Put_Line ("7 : Temps maximum d'attente.");
 
@@ -504,7 +536,7 @@ begin
             Autocomplete; -- à remplacer
 
          when 6 =>
-            null; -- à remplacer
+            INVERSE_ORDRE_DANS_RUBAN(2,2,R1); -- à remplacer
 
          when 7 =>
             null; -- à remplacer
