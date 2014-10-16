@@ -345,18 +345,25 @@ procedure bateaux is
 
    end Autocomplete;
 
-   procedure INVERSE_ORDRE_DANS_RUBAN (Position: in integer;K: integer ; R: in out RUBAN_DE_BATEAUX) is
-      i : integer; --counter
-   begin
-      if K=1 then --Ouvrir ruban
+   procedure INVERSE_ORDRE_DANS_RUBAN (Position: in integer;K: integer ) is --Position : position du bateau dans le ruban, K : 1= Depart :2=Arrive 3:Location
+      TamponNbatInf : integer;
+      TamponHInf : HEURE;
+      TamponNbatSup : integer;
+      TamponHSup : HEURE;
+
+      procedure Ouvrir_Ruban_K (K: in integer) is
+      begin
+          if K=1 then --Ouvrir ruban
          DEMARRER1;
       elsif K=2 then
          DEMARRER2;
       else
          DEMARRERL;
       end if;
-      i :=0; --Reset counter
-      While i /= Position loop --On se place sur la i-ème donnée
+      end Ouvrir_Ruban_K;
+
+      procedure Choix_Avancer (K : in integer )is
+      begin
          if K=1 then
             AVANCER1;
          elsif K=2 then
@@ -364,16 +371,93 @@ procedure bateaux is
          else
             AVANCERL;
          end if;
-         i := i+1;
-      end loop;
-       put(BAT_COUR1.NBAT);
-       if K=1 then -- Fermer ruban
-         FERMER1;
-      elsif k=2 then
-         FERMER2;
-      else
+      end Choix_Avancer;
+
+      procedure Fermer_Ruban_K (K: in integer) is
+      begin
+         if K=1 then -- Fermer ruban
+            FERMER1;
+         elsif k=2 then
+            FERMER2;
+         else
          FERMERL;
           end if;
+      end Fermer_Ruban_K;
+
+      procedure Mise_En_Position (Position : in integer; K : in integer)is
+      i : integer :=0; --compteur
+      begin
+         Fermer_Ruban_K(K);
+         Ouvrir_Ruban_K(K);
+         i:=0;
+         While i /= Position loop --On se place sur la i-ème donnée
+            put(i);
+            Choix_Avancer(K);
+            i := i+1;
+         end loop;
+      end Mise_En_Position;
+
+   begin
+      Ouvrir_Ruban_K(K); --Ouvrir ruban
+
+      Mise_En_Position(Position,K); --On se place sur la i-ème donnée
+
+      if K=1 then --INVERSION
+         TamponNbatInf := BAT_COUR1.NBAT; --Mise en tampon du premier champ
+         TamponHInf.NH := BAT_COUR1.H.NH;
+         TamponHInf.NM := BAT_COUR1.h.NM;
+         Choix_Avancer(K);
+         TamponNbatSup := BAT_COUR1.NBAT; --Mise en tampon du 2eme champ
+         TamponHSup.NH := BAT_COUR1.H.NH;
+         TamponHSup.NM := BAT_COUR1.h.NM;
+
+         BAT_COUR1.NBAT := TamponNbatInf;--2eme champ devient 1er champ
+         BAT_COUR1.H.NH := TamponHInf.NH;
+         BAT_COUR1.H.NM := TamponHInf.NM;
+         Mise_En_Position(Position,K);
+         BAT_COUR1.NBAT := TamponNbatSup;--1eme champ devient 2er champ
+         BAT_COUR1.H.NH := TamponHSup.NH;
+         BAT_COUR1.H.NM := TamponHSup.NM;
+
+      elsif K=2 then
+         Put_Line("1");
+         TamponNbatInf := BAT_COUR2.NBAT; --Mise en tampon du premier champ
+         TamponHInf.NH := BAT_COUR2.H.NH;
+         TamponHInf.NM := BAT_COUR2.h.NM;
+         Choix_Avancer(K);
+         TamponNbatSup := BAT_COUR2.NBAT; --Mise en tampon du 2eme champ
+         TamponHSup.NH := BAT_COUR2.H.NH;
+         TamponHSup.NM := BAT_COUR2.h.NM;
+
+         BAT_COUR2.NBAT := TamponNbatInf;--2eme champ devient 1er champ
+         BAT_COUR2.H.NH := TamponHInf.NH;
+         BAT_COUR2.H.NM := TamponHInf.NM;
+         Mise_En_Position(Position,K);
+         BAT_COUR2.NBAT := TamponNbatSup;--1eme champ devient 2er champ
+         BAT_COUR2.H.NH := TamponHSup.NH;
+         BAT_COUR2.H.NM := TamponHSup.NM;
+         Put_Line("duck that shit");
+      else
+         Null;
+          ------A MODIFIER
+--           TamponNbatInf := LOC_COUR.NBAT; --Mise en tampon du premier champ
+--           TamponHInf.NH := LOC_COUR.H.NH;
+--           TamponHInf.NM := LOC_COUR.h.NM;
+--           Choix_Avancer(K);
+--           TamponNbatSup := LOC_COUR.NBAT; --Mise en tampon du 2eme champ
+--           TamponHSup.NH := LOC_COUR.H.NH;
+--           TamponHSup.NM := LOC_COUR.h.NM;
+--
+--           LOC_COUR.NBAT := TamponNbatInf;--2eme champ devient 1er champ
+--           LOC_COUR.H.NH := TamponHInf.NH;
+--           LOC_COUR.H.NM := TamponHInf.NM
+--           Mise_En_Position(Position,K);
+--           LOC_COUR.NBAT := TamponNbatSup;--1eme champ devient 2er champ
+--           LOC_COUR.H.NH := TamponHSup.NH;
+--           LOC_COUR.H.NM := TamponHSup.NM
+      end if;
+
+      Fermer_Ruban_K(K); -- Fermer ruban
    end INVERSE_ORDRE_DANS_RUBAN;
 --     procedure TRI_RUBAN_PAR_HEURE (R: in out RUBAN_DE_BATEAUX) is
 --        H:HEURE;
@@ -501,7 +585,7 @@ begin
       Put_Line ("5 : Autocomplete");
 
       --Put_Line ("6 : Affichage du ruban des locations.");
-      Put_Line ("6 : Teste.");
+      Put_Line ("6 : Teste!.");
 
       Put_Line ("7 : Temps maximum d'attente.");
 
@@ -536,7 +620,7 @@ begin
             Autocomplete; -- Ã  remplacer
 
          when 6 =>
-            INVERSE_ORDRE_DANS_RUBAN(2,2,R1); -- Ã  remplacer
+            INVERSE_ORDRE_DANS_RUBAN(3,2); -- Ã  remplacer
 
          when 7 =>
             null; -- Ã  remplacer
@@ -554,4 +638,4 @@ end bateaux;
 
 ------------------------------------------------------------------------------
 --                       FIN DU TP1   BATEAUX                               --
-------------------------------------------------------------------------------
+----------ermer_Ruban_K--------------------------------------------------------------------Ouvrir_Ruban_K
