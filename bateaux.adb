@@ -346,10 +346,9 @@ procedure bateaux is
    end Autocomplete;
 
    procedure INVERSE_ORDRE_DANS_RUBAN (Position: in integer;K: integer ) is --Position : position du bateau dans le ruban, K : 1= Depart :2=Arrive 3:Location
-      TamponNbatInf : integer;
-      TamponHInf : HEURE;
-      TamponNbatSup : integer;
-      TamponHSup : HEURE;
+
+      BaTamponInf: BATEAU;
+      BaTamponSup: BATEAU;
 
       procedure Ouvrir_Ruban_K (K: in integer) is
       begin
@@ -391,7 +390,6 @@ procedure bateaux is
          Ouvrir_Ruban_K(K);
          i:=0;
          While i /= Position loop --On se place sur la i-ème donnée
-            put(i);
             Choix_Avancer(K);
             i := i+1;
          end loop;
@@ -403,40 +401,30 @@ procedure bateaux is
       Mise_En_Position(Position,K); --On se place sur la i-ème donnée
 
       if K=1 then --INVERSION
-         TamponNbatInf := BAT_COUR1.NBAT; --Mise en tampon du premier champ
-         TamponHInf.NH := BAT_COUR1.H.NH;
-         TamponHInf.NM := BAT_COUR1.h.NM;
+         BaTamponInf.NBAT := BAT_COUR1.NBAT; --Mise en tampon du premier champ
+         BaTamponInf.H.NH := BAT_COUR1.H.NH;
+         BaTamponInf.H.NM := BAT_COUR1.H.NM;
          Choix_Avancer(K);
-         TamponNbatSup := BAT_COUR1.NBAT; --Mise en tampon du 2eme champ
-         TamponHSup.NH := BAT_COUR1.H.NH;
-         TamponHSup.NM := BAT_COUR1.h.NM;
+         BaTamponSup.NBAT := BAT_COUR1.NBAT; --Mise en tampon du 2eme champ
+         BaTamponSup.H.NH := BAT_COUR1.H.NH;
+         BaTamponSup.H.NM := BAT_COUR1.H.NM;
 
-         BAT_COUR1.NBAT := TamponNbatInf;--2eme champ devient 1er champ
-         BAT_COUR1.H.NH := TamponHInf.NH;
-         BAT_COUR1.H.NM := TamponHInf.NM;
+         ENREGISTRER (R1,BaTamponInf);--2eme champ devient 1er champ
          Mise_En_Position(Position,K);
-         BAT_COUR1.NBAT := TamponNbatSup;--1eme champ devient 2er champ
-         BAT_COUR1.H.NH := TamponHSup.NH;
-         BAT_COUR1.H.NM := TamponHSup.NM;
+         ENREGISTRER (R1,BaTamponSup);--1eme champ devient 2er champ
 
       elsif K=2 then
-         Put_Line("1");
-         TamponNbatInf := BAT_COUR2.NBAT; --Mise en tampon du premier champ
-         TamponHInf.NH := BAT_COUR2.H.NH;
-         TamponHInf.NM := BAT_COUR2.h.NM;
+         BaTamponInf.NBAT := BAT_COUR2.NBAT; --Mise en tampon du premier champ
+         BaTamponInf.H.NH := BAT_COUR2.H.NH;
+         BaTamponInf.H.NM := BAT_COUR2.H.NM;
          Choix_Avancer(K);
-         TamponNbatSup := BAT_COUR2.NBAT; --Mise en tampon du 2eme champ
-         TamponHSup.NH := BAT_COUR2.H.NH;
-         TamponHSup.NM := BAT_COUR2.h.NM;
+         BaTamponSup.NBAT := BAT_COUR2.NBAT; --Mise en tampon du 2eme champ
+         BaTamponSup.H.NH := BAT_COUR2.H.NH;
+         BaTamponSup.H.NM := BAT_COUR2.H.NM;
 
-         BAT_COUR2.NBAT := TamponNbatInf;--2eme champ devient 1er champ
-         BAT_COUR2.H.NH := TamponHInf.NH;
-         BAT_COUR2.H.NM := TamponHInf.NM;
+         ENREGISTRER (R2,BaTamponInf);--2eme champ devient 1er champ
          Mise_En_Position(Position,K);
-         BAT_COUR2.NBAT := TamponNbatSup;--1eme champ devient 2er champ
-         BAT_COUR2.H.NH := TamponHSup.NH;
-         BAT_COUR2.H.NM := TamponHSup.NM;
-         Put_Line("duck that shit");
+         ENREGISTRER (R2,BaTamponSup);--1eme champ devient 2er champ
       else
          Null;
           ------A MODIFIER
